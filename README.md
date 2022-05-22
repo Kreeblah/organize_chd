@@ -14,8 +14,8 @@ organize_chd.zsh -d /Volumes/MiSTer/Games/PSX -c -r -n -s
 ## Parameters:
 
 ```
+-d - The base directory (passed as a parameter to this option) to search from to find images, and the immediate base directory to organize images under
 -c - Compress BIN/CUE files into CHD files (note that this will exit the script on any errors; if restarted, it will skip any games with existing CHD files)
--d - The base directory to search from to find images, and the immediate base directory to organize images under
 -r - Enable organization by region (NTSC-U, NTSC-J, PAL)
 -n - Merge games with multiple discs into a single directory with all discs in it
 -s - Delete source BIN/CUE files and remove empty directories
