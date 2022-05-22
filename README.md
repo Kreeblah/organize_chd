@@ -5,13 +5,13 @@ This script has been tested on BSD-like systems (primarily macOS), and while it 
 
 *Warning:* Do not attempt any of the organization methods except from the directory you want your games organized under.  In other words, if you run this from a directory that has images from multiple systems in subdirectories under it, you'll end up merging your systems' libraries together.
 
-Example usage:
+## Example usage:
 
 ```
 organize_chd.zsh -d /Volumes/MiSTer/Games/PSX -c -r -n -s
 ```
 
-Parameters:
+## Parameters:
 
 ```
 -c - Compress BIN/CUE files into CHD files (note that this will exit the script on any errors; if restarted, it will skip any games with existing CHD files)
@@ -21,6 +21,10 @@ Parameters:
 -s - Delete source BIN/CUE files and remove empty directories
 ```
 
-Known issues:
+## Known issues:
 
 - This script currently doesn't handle filenames with dollar signs in them well.  The shell interprets the names as variable names, which it's unable to expand.
+
+## Attributions:
+
+The disc number merging code came from a script by swsx.
