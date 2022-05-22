@@ -103,8 +103,8 @@ zmodload zsh/zutil
 autoload is-at-least
 
 if ! is-at-least 5.8 ${ZSH_VERSION}; then
-  eerror "zsh 5.8 is required for option parsing in this script, but zsh version ${ZSH_VERSION} was used"
-  exit 1
+	echo "zsh 5.8 is required for option parsing in this script, but zsh version ${ZSH_VERSION} was used"
+	exit 1
 fi
 
 unset disc_directory
