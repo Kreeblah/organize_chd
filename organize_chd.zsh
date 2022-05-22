@@ -6,9 +6,11 @@ function do_compress_chd {
 		exit 1
 	fi
 
+	unset num_cpus
+
 	num_cpus=$([ $(uname) = 'Linux' ] && nproc || sysctl -n hw.ncpu)
 
-	if [[ -z "$num_cpus" ]]; then
+	if [[ -z "${num_cpus}" ]]; then
 		echo "Unable to determine number of CPUs"
 		exit 1
 	fi
@@ -83,17 +85,18 @@ function do_organize_regions {
 }
 
 function do_merge_disc_numbers {
-	find -E "${disc_directory[2]}" -regex '.* \(Disc [0-9]+\).*\.chd' | while read found_chd; do
-    	echo "Found CHD: ${found_chd}"
-    	folder_to_move_to=$(echo "${found_chd}" | sed -E -e 's/(.*)( \(Disc [0-9]+\))(.*)\/.*\.chd/\1\3/')
-    	mkdir -p "${folder_to_move_to}"
-    	echo "Created folder ${folder_to_move_to}"
-    	mv "${found_chd}" "${folder_to_move_to}/."
-    	echo "Moved CHD ${found_chd} to ${folder_to_move_to}"
-    	folder_to_remove=$(echo "${found_chd}" | sed -E -e 's/(.*)\/.*\.chd/\1/')
-    	rm -r "${folder_to_remove}"
-    	echo "Removed folder ${folder_to_remove}"
-	done
+	find -E "${disc_directory[2]}" -regex '.* \(Disc [0-9]+\).*\.chd' | while read found_chd;
+	do
+		echo "Found CHD: ${found_chd}"
+		folder_to_move_to=$(echo "${found_chd}" | sed -E -e 's/(.*)( \(Disc [0-9]+\))(.*)\/.*\.chd/\1\3/')
+		mkdir -p "${folder_to_move_to}"
+		echo "Created folder ${folder_to_move_to}"
+		mv "${found_chd}" "${folder_to_move_to}/."
+		echo "Moved CHD ${found_chd} to ${folder_to_move_to}"
+		folder_to_remove=$(echo "${found_chd}" | sed -E -e 's/(.*)\/.*\.chd/\1/')
+		rm -r "${folder_to_remove}"
+		echo "Removed folder ${folder_to_remove}"
+	done;
 }
 
 zmodload zsh/zutil
