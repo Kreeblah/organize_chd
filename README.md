@@ -27,4 +27,4 @@ organize_chd.zsh -d /Volumes/MiSTer/Games/PSX -c -r -n -s
 
 ## Attributions:
 
-The disc number merging code came from a script by swsx.
+The disc number merging code came from a script by swsp.
