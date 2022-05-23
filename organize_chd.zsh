@@ -121,8 +121,8 @@ function do_merge_disc_numbers {
 			folder_to_remove=$(echo "${found_chd}" | sed -E -e 's/(.*)\/.*\.chd/\1/')
 			find "${folder_to_remove}" -empty -type d | while read empty_dir;
 			do
-				echo "Removing empty directory: ${folder_to_remove}"
-				rmdir "${folder_to_remove}"
+				echo "Removing empty directory: ${empty_dir}"
+				rmdir "${empty_dir}"
 			done;
 		else
 			echo "CHD already merged for disc numbers: ${found_chd}"
