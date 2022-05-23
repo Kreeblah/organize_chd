@@ -23,6 +23,7 @@ organize_chd.zsh -d /Volumes/MiSTer/Games/PSX -c -r -n -s
 
 ## Known issues:
 
+- There was one report of unwanted file deletion.  I rewrote the code that I think might have been responsible, but it's worth having a backup, just in case.
 - This script currently doesn't handle filenames with dollar signs in them well.  The shell interprets the names as variable names, which it's unable to expand.
 
 ## Attributions:
