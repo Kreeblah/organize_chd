@@ -34,6 +34,7 @@ function do_compress_chd {
 	for i in "${disc_directory[2]}"/**/*.cue;
 	do
 		tmpcue="${i:r}"
+		tmpcue="${tmpcue//$/\\$}"
 		if [[ ! -f "${tmpcue}.chd" ]]; then
 			echo "Processing: ${tmpcue}.cue"
 			chdman createcd -np ${num_cpus} -i "${tmpcue}.cue" -o "${tmpcue}.chd"
@@ -89,8 +90,12 @@ function do_organize_single_region {
 
 	eval ${find_command_str} | while read found_regioned_dir;
 	do
-		echo "Moving ${found_regioned_dir} to ${console_region_dir}"
-		mv "${found_regioned_dir}" "${console_region_dir}"
+		if [[ "${found_regioned_dir}" != "${console_region_dir}/${found_regioned_dir:t}" ]]; then
+			echo "Moving ${found_regioned_dir} to ${console_region_dir}"
+			mv "${found_regioned_dir}" "${console_region_dir}"
+		else
+			echo "CHD directory already organized by region: ${found_regioned_dir}"
+		fi
 	done;
 }
 
@@ -103,15 +108,25 @@ function do_organize_regions {
 function do_merge_disc_numbers {
 	find -E "${disc_directory[2]}" -regex '.* \(Disc [0-9]+\).*\.chd' | while read found_chd;
 	do
-		echo "Found CHD: ${found_chd}"
-		folder_to_move_to=$(echo "${found_chd}" | sed -E -e 's/(.*)( \(Disc [0-9]+\))(.*)\/.*\.chd/\1\3/')
-		mkdir -p "${folder_to_move_to}"
-		echo "Created folder ${folder_to_move_to}"
-		mv "${found_chd}" "${folder_to_move_to}/."
-		echo "Moved CHD ${found_chd} to ${folder_to_move_to}"
-		folder_to_remove=$(echo "${found_chd}" | sed -E -e 's/(.*)\/.*\.chd/\1/')
-		rm -r "${folder_to_remove}"
-		echo "Removed folder ${folder_to_remove}"
+		folder_to_move_to=$(echo "${found_chd:h}" | sed -E -e 's/(\/[^\/]*)( \(Disc [0-9]+\))([^\/]*)[\/]?$/\1\3/')
+		if [[ "${found_chd}" != "${folder_to_move_to}/${found_chd:t}" ]]; then
+			echo "Found CHD: ${found_chd}"
+			echo "Directory to move to: ${folder_to_move_to}"
+			if [[ ! -d "${folder_to_move_to}" ]]; then
+				mkdir -p "${folder_to_move_to}"
+				echo "Created directory ${folder_to_move_to}"
+			fi
+			mv "${found_chd}" "${folder_to_move_to}/."
+			echo "Moved CHD ${found_chd} to ${folder_to_move_to}"
+			folder_to_remove=$(echo "${found_chd}" | sed -E -e 's/(.*)\/.*\.chd/\1/')
+			find "${folder_to_remove}" -empty -type d | while read empty_dir;
+			do
+				echo "Removing empty directory: ${folder_to_remove}"
+				rmdir "${folder_to_remove}"
+			done;
+		else
+			echo "CHD already merged for disc numbers: ${found_chd}"
+		fi
 	done;
 }
 
