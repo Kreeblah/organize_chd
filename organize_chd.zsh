@@ -110,11 +110,11 @@ function do_merge_disc_numbers {
 	do
 		folder_to_move_to=$(echo "${found_chd:h}" | sed -E -e 's/(\/[^\/]*)( \(Disc [0-9]+\))([^\/]*)[\/]?$/\1\3/')
 		if [[ "${found_chd}" != "${folder_to_move_to}/${found_chd:t}" ]]; then
-			echo "Found CHD: ${found_chd}"
-			echo "Directory to move to: ${folder_to_move_to}"
+			echo "Found CHD for disc merging: ${found_chd}"
+			echo "Directory to move to for disc merging: ${folder_to_move_to}"
 			if [[ ! -d "${folder_to_move_to}" ]]; then
 				mkdir -p "${folder_to_move_to}"
-				echo "Created directory ${folder_to_move_to}"
+				echo "Created directory: ${folder_to_move_to}"
 			fi
 			mv "${found_chd}" "${folder_to_move_to}/."
 			echo "Moved CHD ${found_chd} to ${folder_to_move_to}"
