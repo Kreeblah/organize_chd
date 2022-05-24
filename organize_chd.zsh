@@ -108,7 +108,7 @@ function do_organize_regions {
 function do_merge_disc_numbers {
 	find -E "${disc_directory[2]}" -regex '.* \(Disc [0-9]+\).*\.chd' | while read found_chd;
 	do
-		folder_to_move_to=$(echo "${found_chd:h}" | sed -E -e 's/(\/[^\/]*)( \(Disc [0-9]+\))([^\/]*)[\/]?$/\1\3/')
+		folder_to_move_to=$(echo "${found_chd:h}" | sed -E -e 's/(\/[^\/]*)( \(Disc [0-9]+\))([^\/]*[\/]?$)/\1\3/')
 		if [[ "${found_chd}" != "${folder_to_move_to}/${found_chd:t}" ]]; then
 			echo "Found CHD for disc merging: ${found_chd}"
 			echo "Directory to move to for disc merging: ${folder_to_move_to}"
