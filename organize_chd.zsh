@@ -66,28 +66,28 @@ function do_delete_source_image {
 }
 
 function do_organize_single_region {
-	find_command_str="find \"${disc_directory[2]}\" -type d \("
+	find_command_args=("${disc_directory[2]}" -type d \()
 	existing_find_str=0
 	console_region_dir="${disc_directory[2]}/${@[$#]}"
 	for i in "${@:1:#-1}";
 	do
 		if [[ ${existing_find_str} -ne 0 ]]; then
-			find_command_str=${find_command_str}" -or"
+			find_command_args+=(-or)
 		else
 			existing_find_str=1
 		fi
 
-		find_command_str=${find_command_str}" -name \"*\(${i}*\""
+		find_command_args+=(-name "*(${i}*")
 	done;
 
-	find_command_str=${find_command_str}" \)"
+	find_command_args+=(\))
 
 	if [[ ! -d "${console_region_dir}" ]]; then
 		echo "Creating: ${console_region_dir}"
 		mkdir -p "${console_region_dir}"
 	fi
 
-	eval ${find_command_str} | while read found_regioned_dir;
+	find "${find_command_args[@]}" | while read found_regioned_dir;
 	do
 		if [[ "${found_regioned_dir}" != "${console_region_dir}/${found_regioned_dir:t}" ]]; then
 			echo "Moving ${found_regioned_dir} to ${console_region_dir}"
