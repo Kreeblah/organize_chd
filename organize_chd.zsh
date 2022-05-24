@@ -34,7 +34,6 @@ function do_compress_chd {
 	for i in "${disc_directory[2]}"/**/*.cue;
 	do
 		tmpcue="${i:r}"
-		tmpcue="${tmpcue//$/\\$}"
 		if [[ ! -f "${tmpcue}.chd" ]]; then
 			echo "Processing: ${tmpcue}.cue"
 			chdman createcd -np ${num_cpus} -i "${tmpcue}.cue" -o "${tmpcue}.chd"
