@@ -24,7 +24,7 @@ organize_chd.zsh -d /Volumes/MiSTer/Games/PSX -c -r -n -s
 ## Known issues:
 
 - There was one report of unwanted file deletion.  I rewrote the code that I think might have been responsible, but it's worth having a backup, just in case.
-- This script currently doesn't handle filenames with dollar signs in them well for CHD creation.  chdman seems to try to do its own variable substitution, which I don't see a way to disable.
+- This script currently doesn't handle filenames with dollar signs in them well for CHD creation.  [chdman does its own variable substitution, with no way to disable it.](https://github.com/mamedev/mame/issues/9822)
 
 ## Attributions:
 
