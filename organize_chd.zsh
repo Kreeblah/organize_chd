@@ -99,9 +99,11 @@ function do_organize_single_region {
 }
 
 function do_organize_regions {
-	do_organize_single_region "Brazil" "USA" "NTSC-U"
+	do_organize_single_region "Canada" "Latin America" "USA" "World" "NTSC-U"
 	do_organize_single_region "Japan" "NTSC-J"
-	do_organize_single_region "Australia" "Denmark" "Europe" "Finland" "France" "Germany" "Italy" "Netherlands" "Norway" "Poland" "Portugal" "Russia" "Spain" "Sweden" "UK" "PAL"
+	do_organize_single_region "Asia" "Korea" "NTSC-A"
+	do_organize_single_region "Australia" "Austria" "Belgium" "Denmark" "Europe" "Finland" "France" "Germany" "Italy" "Netherlands" "Norway" "Poland" "Portugal" "Russia" "Spain" "Sweden" "Switzerland" "Turkey" "UK" "PAL"
+	do_organize_single_region "Brazil" "PAL-M"
 }
 
 function do_merge_disc_numbers {
