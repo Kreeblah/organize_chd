@@ -101,7 +101,7 @@ function do_organize_single_region {
 function do_organize_regions {
 	do_organize_single_region "Canada" "Latin America" "Unknown" "USA" "World" "NTSC-U"
 	do_organize_single_region "Japan" "NTSC-J"
-	do_organize_single_region "Asia" "China" "Hong Kong" "Korea" "NTSC-A"
+	do_organize_single_region "Asia" "China" "Hong Kong" "Korea" "Taiwan" "NTSC-A"
 	do_organize_single_region "Australia" "Austria" "Belgium" "Denmark" "Europe" "Finland" "France" "Germany" "Italy" "Netherlands" "Norway" "Poland" "Portugal" "Russia" "Spain" "Sweden" "Switzerland" "Turkey" "UK" "PAL"
 	do_organize_single_region "Brazil" "PAL-M"
 }
